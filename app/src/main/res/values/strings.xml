@@ -18,6 +18,8 @@
     <string name="button_menu_com">Comunicación</string>
     <string name="button_menu_perfil">Perfil usuario</string>
     <string name="button_menu_aler">Alertas</string>
+    <string name="button_menu_glos">Glosario</string>
+    <string name="button_menu_cerrar">Cerrar sesión</string>
 
     <!--Recovery psw -->
     <string name="titulo_rec_psw">Descuida nosotros vamos a recuperar</string>

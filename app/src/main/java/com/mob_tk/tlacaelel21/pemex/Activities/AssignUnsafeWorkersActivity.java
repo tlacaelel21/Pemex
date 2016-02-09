@@ -45,7 +45,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
     TextView text1, text2,text3;
     EditText comment;
     ImageButton imageButtonSave;
-
+    String query;
     String suggestions[];
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -75,9 +75,14 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
 
         imageButtonSave=(ImageButton) findViewById(R.id.imgBSave);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            query=extras.getString("query");
+        }
+
         /**Se realiza la consulta a la base de datos */
         final ArrayList<HashMap<String, String>> results;
-        results= Utils.exeLocalQuery(this, "SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado");
+        results= Utils.exeLocalQuery(this, query);
         //Log.i("TAM->",""+results.size());
         listview_array=new String[results.size()];
         /*for(int idx=0;idx<results.size();idx++){
@@ -115,9 +120,27 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         imageButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.exeLocalInsQuery(getApplicationContext(),"");
+               String queryInsert="SELECT MAX(ae_id) as ae_id FROM auditoriaai";
+                /**Se realiza la consulta a la base de datos */
+                final ArrayList<HashMap<String, String>> resultsMax;
+                resultsMax= Utils.exeLocalQuery(AssignUnsafeWorkersActivity.this, query);
+                //Log.i("TAM->",""+results.size());
+                int idMax=1;
+                for(int idx=0;idx<resultsMax.size();idx++){
+                    if(null!=resultsMax.get(idx).get("ae_id")){
+                        idMax=Integer.parseInt(resultsMax.get(idx).get("ae_id"));
+                        Log.i("CAMPO->", resultsMax.get(idx).get("ae_id"));
+                    }
+                }
+                /** ******************************* */
+
+                String querySel="";
+               // Utils.exeLocalInsQuery(getApplicationContext(),"");
                 Intent intent =
-                        new Intent(AssignUnsafeWorkersActivity.this, UnsafeActActivity.class);
+                        new Intent(AssignUnsafeWorkersActivity.this, PeopleQActivity.class);
+                intent.putExtra("query",""+query);
+                intent.putExtra("campo","nombre");
+                intent.putExtra("clave","emp_num_emp");
                 startActivity(intent);
                 finish();
             }
@@ -185,14 +208,14 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                 PopupMenu popup = new PopupMenu(context, popUpBtn);
                 popup.getMenuInflater().inflate(R.menu.pop_up_auw, popup.getMenu());
 
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                /*popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.item_trabajador) {
                             Toast.makeText(context, "SISTEMA PEMEX", Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
-                });
+                });*/
                 popup.show();//showing popup menu}
 
             }

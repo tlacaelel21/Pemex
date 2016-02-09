@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.mob_tk.tlacaelel21.pemex.R;
 
@@ -20,6 +21,7 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
     int numEmp=0, numCon=0;
     String numEmpls[];
     String numContra[];
+    EditText activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +38,7 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
         Button btnContr=(Button) findViewById(R.id.btn_contractor);
         Button btnBoss=(Button) findViewById(R.id.btn_boss);
 
-
+        activity=(EditText) findViewById(R.id.activity);
         //Button btnWorkers=(Button) findViewById(R.id.btn_workers);
         /*Button btnAreas=(Button) findViewById(R.id.boton_area);*/
 
@@ -69,24 +71,20 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
                 btnBoss.setText(preferences.getString("jefes", ""));
             }
         }
-
-
-
-        /*Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            numEmpls=extras.getStringArray("numEmpl");
-            if(numEmpls!=null)
-                numEmp=numEmpls.length;
-            numContra=extras.getStringArray("numCont");
-            if(numContra!=null)
-                numCon=numContra.length;
+        if(null!=preferences.getString("actividad", "")) {
+            if(preferences.getString("actividad", "").length()>0){
+                activity.setText(preferences.getString("actividad", ""));
+            }
         }
-        if(numEmp>0){
-            btnWorkers.setText("Trabajadores("+numEmp+")");
-        }
-        if(numCon>0){
-            btnContr.setText("Contratistas("+numCon+")");
-        }*/
+
+       /* activity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {*/
+                //if (!hasFocus) {
+//                    Log.i("ACTY","LOSE FOCUS");
+
+            /*    //}
+            }
+        });*/
 
         btnInst.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -105,6 +103,11 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
         //Trabajadores
         btnWorkers.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                SharedPreferences preferences;
+                preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("actividad", ""+activity.getText());
+                editor.commit();
                 Intent intent =
                         new Intent(AuditP2Activity.this, WorkersActivity.class);
                 startActivity(intent);
@@ -114,6 +117,11 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
         //Contratistas
         btnContr.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                SharedPreferences preferences;
+                preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("actividad", ""+activity.getText());
+                editor.commit();
                 Intent intent =
                         new Intent(AuditP2Activity.this, ContractorActivity.class);
                 startActivity(intent);
@@ -124,6 +132,11 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
         btnBoss.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Log.i("BOTON","ENTRO AL BOSS");
+                SharedPreferences preferences;
+                preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("actividad", ""+activity.getText());
+                editor.commit();
                 Intent intent =
                         new Intent(AuditP2Activity.this, GeneralContainerActivity.class);
                 intent.putExtra("query","SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado WHERE emp_puesto like ('%jefe%')");
@@ -145,10 +158,6 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
                 finish();
             }
         });
-
-
-
-
 
         SharedPreferences preferences;
         preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);

@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class PeopleQActivity extends Activity {
     TextView gralTitle;
     String titulo, query, campo, clave, tipo;
     int procede=0;
+    ImageButton imageButtonClose;
 
 
     private String listview_array[];
@@ -50,6 +52,7 @@ public class PeopleQActivity extends Activity {
         final Context context=getApplicationContext();
 
         lista = (ListView) findViewById(R.id.list_people_qualify);
+        imageButtonClose=(ImageButton) findViewById(R.id.imageButtonClose);
         /*buscador=(EditText)findViewById(R.id.txt_gral_search);
         gralTitle=(TextView)findViewById(R.id.gral_title);*/
 
@@ -60,7 +63,7 @@ public class PeopleQActivity extends Activity {
             campo=extras.getString("campo");
             clave=extras.getString("clave");
             tipo=extras.getString("tipo");
-            procede=Integer.parseInt(extras.getString("procede"));
+            //procede=Integer.parseInt(extras.getString("procede"));
         }
 
         //gralTitle.setText(titulo);
@@ -84,8 +87,18 @@ public class PeopleQActivity extends Activity {
                 califs[idx] = 0;
             }
             listview_array[idx]="    "+califs[idx]+"    "+results.get(idx).get(campo);
-            Log.i("CAMPO->",results.get(idx).get(campo));
+            //Log.i("CAMPO->",results.get(idx).get(campo));
         }
+
+        imageButtonClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =
+                        new Intent(PeopleQActivity.this, UnsafeActActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         /********************************* */
@@ -125,18 +138,22 @@ public class PeopleQActivity extends Activity {
                 editor.putString(tipo, "" + lista.getItemAtPosition(position));
                 editor.putString(clave, "" + results.get(position).get(clave));
                 editor.commit();
-                if (procede == 1) {
+               /* if (procede == 1) {
                     Intent intent =
                             new Intent(PeopleQActivity.this, AssignUnsafeWorkersActivity.class);
+                    intent.putExtra("query",""+query);
                     startActivity(intent);
                     finish();
                 }
-                if (procede == 2) {
+                if (procede == 2) {*/
                     Intent intent =
                             new Intent(PeopleQActivity.this, AssignUnsafeWorkersActivity.class);
+                    intent.putExtra("query",""+query);
+                    intent.putExtra("campo",""+campo);
+                    intent.putExtra("clave",""+clave);
                     startActivity(intent);
                     finish();
-                }
+                //}
             }
         });
     }

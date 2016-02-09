@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
+   <!-- <item
         android:id="@+id/item_trabajador"
         android:title="Agregar trabajador"
         android:drawableLeft="@drawable/worker"
          />
     <item
         android:id="@+id/item_lugar"
-        android:title="Agregar lugar o encuentro"/>
+        android:title="Agregar lugar o encuentro"/>-->
     <item
         android:id="@+id/item_evidencia"
         android:title="Capturar evidencia"/>

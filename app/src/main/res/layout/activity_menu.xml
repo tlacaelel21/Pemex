@@ -5,7 +5,16 @@
     android:weightSum="1"
     android:background="@color/colorBackLogin"
     android:id="@+id/login">
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/imageView"
+        android:src="@drawable/menu" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2" >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,19 +23,11 @@
         android:dividerPadding="15dp"
         android:weightSum="1">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/imageView"
-            android:src="@drawable/menu" />
-
-
         <Button
             android:id="@+id/boton_audit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:drawablePadding="20dip"
@@ -135,5 +136,44 @@
             android:textAllCaps="false"
             android:gravity="left|center"
             />
+        <Button
+            android:id="@+id/boton_glosario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:drawablePadding="20dip"
+            android:paddingStart="25dp"
+            android:background="@drawable/button_menu"
+            android:drawableLeft="@drawable/worker"
+            android:text="@string/button_menu_glos"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="16dip"
+            android:textAllCaps="false"
+            android:gravity="left|center"
+            />
+        <Button
+            android:id="@+id/boton_cerrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:drawablePadding="20dip"
+            android:paddingStart="25dp"
+            android:background="@drawable/button_login_psw"
+            android:drawableLeft="@drawable/worker"
+            android:text="@string/button_menu_cerrar"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="16dip"
+            android:textAllCaps="false"
+            android:gravity="left|center"
+            />
+
     </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
