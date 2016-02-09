@@ -157,7 +157,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                 public void onClick(View v) {
                     chkGreen.setButtonDrawable(R.drawable.target_b);
                     chkRed.setButtonDrawable(R.drawable.target_b);
-                    chkYell.setButtonDrawable(R.drawable.target_yellow);
+                    chkYell.setButtonDrawable(R.drawable.target_yellow_2);
                 }
         });
         chkRed.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +170,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         linearLayoutCal1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //boolean isOk = ((CheckBox) view).isChecked();
-                chkGreen.setButtonDrawable(R.drawable.target_green);
+                chkGreen.setButtonDrawable(R.drawable.target_green_2);
                 chkRed.setButtonDrawable(R.drawable.target_b);
                 chkYell.setButtonDrawable(R.drawable.target_b);
                 comment.setText(text1.getText());
