@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#08844C</color>
+    <color name="colorPrimaryDark">#08844C</color>
+    <color name="colorAccent">#08844C</color>
+    <color name="colorTextBlack">#000000</color>
+    <color name="colorTextBlDegra">#434343</color>
+    <color name="colorBackLogin">#EAF0F5</color>
+    <color name="colorInputLogin">#FFFFFF</color>
+    <color name="colorButtonLogin">#08844C</color>
+    <color name="colorButtonLoginP">#11D07A</color>
+    <color name="colorButtonLoginPsw">#CF152C</color>
+    <color name="colorButtonLoginPswP">#F74D62</color>
+    <color name="colorButtonMenu">#1A252B</color>
+    <color name="colorButtonMenuP">#08844C</color>
+    <color name="colorButtonRecPsw">#08844C</color>
+    <color name="colorButtonRecPswP">#999999</color>
+    <color name="colorFondoRecPsw">#EEEEEE</color>
+    <color name="colorFondoWc">#CCCCCC</color>
+    <color name="colorChkWorkers">#E0E0E0</color>
+    <color name="child_row">#EAEAEA</color>
+    <color name="subtitle_workers">#485155</color>
+    <color name="assign_unsafe">#AB222D</color>
+
+    <color name="backgroundBasicColor">#EAF0F5</color>
+    <color name="textMainBasicColor">#06544F</color>
+
+
+
+</resources>

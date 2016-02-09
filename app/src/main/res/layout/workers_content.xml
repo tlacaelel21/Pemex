@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/colorBackLogin"
+    android:id="@+id/login">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButtonMenuP">
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/question_mark_white"
+                android:layout_weight="2"
+                android:layout_alignParentLeft="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:textStyle="bold"
+                android:textSize="14dip"
+                android:text="@string/titulo_list_workers"
+                android:id="@+id/textView1"
+                android:textColor="@color/colorInputLogin"
+                android:layout_toRightOf="@id/imageButton"
+                android:layout_weight="1"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_close"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/cross"
+                android:layout_weight="3"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+        <EditText android:id="@+id/txt_busca_wc"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="15dp"
+            android:background="@color/colorInputLogin"
+            android:drawableRight="@drawable/search"
+            android:inputType="textAutoComplete"
+            android:hint="@string/titulo_list_workers_busca"
+            android:paddingLeft="10dp"
+            android:textSize="18dip"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_workers"
+        android:divider="@color/colorButtonMenu"
+        android:dividerHeight="1dp"
+        android:layout_marginBottom="2dp"
+        android:layout_weight="1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:text="Agregar manualmente"
+        android:textColor="#FFF"
+        android:paddingBottom="0dp"
+        android:textSize="20dip"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/button_rec_psw"
+        android:textAllCaps="false"
+        android:id="@+id/btn_add_workers"
+
+        />
+</LinearLayout>

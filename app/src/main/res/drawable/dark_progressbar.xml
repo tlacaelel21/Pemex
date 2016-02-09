@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Define the background properties like color etc -->
+    <item android:id="@android:id/background">
+        <bitmap android:src="@drawable/apptheme_progress_bg_holo_light" />
+
+    </item>
+
+    <!-- Define the progress properties like start color, end color etc -->
+    <item android:id="@android:id/progress">
+        <bitmap android:src="@drawable/apptheme_progress_primary_holo_light" />
+    </item>
+
+</layer-list> 

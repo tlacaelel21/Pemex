@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">Pemex</string>
+
+    <!--Login -->
+    <string name="button_login_acp">Comenzar</string>
+    <string name="button_login_rec">¿Problemas con el inicio de sesión?</string>
+    <string name="num_emp">Número de empleado</string>
+    <string name="pass">Contraseña</string>
+
+    <!--Utilidades -->
+    <string name="synchro_title">Preparando</string>
+    <string name="base_url">http://desarrollo.smartthinking.com.mx:84/DataSMobile.asmx/processReq?code=</string>
+
+    <!--Menu -->
+    <string name="button_menu_ini_aud">Iniciar auditoria</string>
+    <string name="button_menu_per">Permisos de trabajo</string>
+    <string name="button_menu_audi">Auditorias realizadas</string>
+    <string name="button_menu_com">Comunicación</string>
+    <string name="button_menu_perfil">Perfil usuario</string>
+    <string name="button_menu_aler">Alertas</string>
+
+    <!--Recovery psw -->
+    <string name="titulo_rec_psw">Descuida nosotros vamos a recuperar</string>
+    <string name="titulo_rec_psw_2">tus datos de acceso.</string>
+    <string name="button_rec_rec">Recuperar</string>
+    <string name="button_rec_volver">Volver</string>
+
+    <!--Audit p1 -->
+    <string name="titulo_1_wc">Centro de trabajo</string>
+    <string name="titulo_2_wc">Acciones correctivas/preventivas para</string>
+    <string name="titulo_3_wc">corregir/evitar recurrencia en Actos Inseguros</string>
+    <string name="button_menu_wc_ta">Tipo Auditoría</string>
+    <string name="button_menu_wc_reg">Región</string>
+    <string name="button_menu_wc_wc">Centro de trabajo</string>
+    <string name="button_menu_wc_dep">Departamento</string>
+    <string name="button_menu_wc_area">Area</string>
+    <string name="button_menu_wc_sem">Semana</string>
+    <string name="button_wc_cont">Continuar</string>
+    <string name="button_menu_wc_fecha">Fecha</string>
+
+    <!--Audit p2 -->
+    <string name="titulo_1_audit_p2">Centro de trabajo</string>
+    <string name="titulo_2_audit_p2">Hojas de trabajo de campo de auditorías</string>
+    <string name="nobre_audit_p2">Nombre de la auditoría</string>
+    <string name="txt1_audit_p2">Instalación</string>
+    <string name="txt2_audit_p2">Actividad</string>
+    <string name="subtitulo_audit_p2">Involucrados en las actividades</string>
+    <string name="btn_audit_p2_trab">Trabajadores(0)</string>
+    <string name="btn_audit_p2_contra">Contratistas (0)</string>
+    <string name="btn_audit_p2_area">Jefe auditado</string>
+    <string name="button_audit_p2_cont">Continuar</string>
+
+    <!--Workplaces Content-->
+    <string name="titulo_list_wc">Centros de trabajo</string>
+    <string name="titulo_list_wc_busca">Buscar un centro de trabajo</string>
+
+    <!--Departaments Content -->
+    <string name="titulo_list_departments">Departamentos</string>
+    <string name="titulo_list_departments_busca">Busca departamento</string>
+
+    <!--Areas Content -->
+    <string name="titulo_list_areas">Areas</string>
+    <string name="titulo_list_areas_busca">Busca área</string>
+
+    <!--Workers Content -->
+    <string name="titulo_list_workers">Seleccionar trabajadores</string>
+    <string name="titulo_list_workers_busca">Buscar trabajador</string>
+
+    <!--Unsafe act Content -->
+    <string name="titulo_list_u_act">Lista de actos inseguros</string>
+
+    <!--Summary -->
+    <string name="titulo_summary_1">Centro de trabajo</string>
+    <string name="titulo_summary_2">Resumen</string>
+    <string name="indice_summary_1">Indices de Actos Inseguros (IAI):</string>
+    <string name="indice_summary_2">Indices de Actos Seguros (IAS):</string>
+    <string name="btn_summary_emplo">Listado de empleados</string>
+    <string name="btn_summary_act_insec">Listado de actos inseguros</string>
+    <string name="btn_summary_recom_com">Recomendaciones y compromisos</string>
+    <string name="btn_summary_save">Guardar y cerrar auditoría</string>
+    <string name="btn_summary_dw_pdf">Descargar PDF</string>
+    <string name="btn_summary_send">Enviar auditoría</string>
+
+    <!--Workers List Content -->
+    <string name="title_list_workers_1">Lista de trabajadores</string>
+    <string name="title_list_workers_2">Trabajado</string>
+
+    <!--assign unsafe list content -->
+    <string name="title_list_assing_1">Ajustan su equipo de protección personal</string>
+    <string name="title_list_assing_sub_1">1/3</string>
+    <string name="title_list_assing_sub_2">1</string>
+    <string name="title_list_assing_sub_3">3</string>
+    <string name="title_list_assing_workers">Trabajador</string>
+
+    <!--custom dialog -->
+    <string name="instruc">Descripción detallada del acto inseguro y de cada semáforo</string>
+    <string name="instruc0">1/3 corresponde a la siguiente descripción</string>
+    <string name="instruc1">1 corresponde a la siguiente descripción</string>
+    <string name="instruc3">3 corresponde a la siguiente descripción</string>
+
+    <!--General List Content -->
+    <string name="gral_list_title">Titulo</string>
+    <string name="gral_list_search">Busca ...</string>
+</resources>
