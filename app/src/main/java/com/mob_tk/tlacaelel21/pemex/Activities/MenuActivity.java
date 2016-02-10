@@ -49,18 +49,42 @@ public class MenuActivity extends Activity {
             public void onClick(View view) {
 
                 SharedPreferences.Editor editor = preferences.edit();
+                //variables prim pantalla
                 editor.putString("worc_center", "");
                 editor.putString("departament", "");
                 editor.putString("tipoauditoria", "");
                 editor.putString("region", "");
+                editor.putString("area", "");
                 editor.putString("dep_id", "");
+                editor.putString("reg_id","");
+                editor.putString("dep_id","");
+                editor.putString("audit_date","");
+                editor.putString("audit_week","");
+                //variables seg pantalla
                 editor.putString("instalaciones","");
-                editor.putString("jefes","");
                 editor.putString("nums","");
                 editor.putString("conts","");
-
-
-
+                editor.putString("jefes","");
+                editor.putString("actividad", "");
+               /* if(null!=(""+preferences.getInt("employ_size", 0))){
+                    if((""+preferences.getInt("employ_size", 0)).length()>0){
+                        int size = preferences.getInt("employ_size", 0);
+                        for (int i = 0;i<size;i++) {
+                            editor.putString("employ_" + i, "");
+                        }
+                    }
+                }
+                if(null!=(""+preferences.getInt("conts_size", 0))){
+                    if((""+preferences.getInt("conts_size", 0)).length() >0){
+                        int size = preferences.getInt("conts_size", 0);
+                        for (int i = 0;i<size;i++) {
+                            editor.putString("conts_" + i, "");
+                        }
+                    }
+                }*/
+                editor.putString("employ_size","");
+                editor.putString("conts_size","");
+                editor.clear();
                 editor.commit();
                 Intent intent =
                         new Intent(MenuActivity.this, AuditP1Activity.class);
@@ -78,7 +102,7 @@ public class MenuActivity extends Activity {
         AlertDialog alertDialog = new AlertDialog.Builder(ctw).create();
         //AlertDialog alertDialog = new AlertDialog.Builder(MenuActivity.this).create();
         alertDialog.setTitle("Pemex");
-        alertDialog.setMessage(" Bienvenido  "+preferences.getString("emp_nombre", ""));
+        alertDialog.setMessage(" Bienvenido  " + preferences.getString("emp_nombre", ""));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "  ACEPTAR    ",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

@@ -121,19 +121,20 @@ public class WorkersActivity extends Activity {
 
                 Intent intent =
                         new Intent(WorkersActivity.this, AuditP2Activity.class);
-                /*Bundle b = new Bundle();
-                b.putStringArray("numEmpl", num_employ);
-                b.putString("nums", "" + selectedItems.size());
-                intent.putExtras(b);*/
                 startActivity(intent);
                 finish();
                 /** ****************************************************/
             }
         });
-
-
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
     public String [][] searchWorkers(String query){
@@ -160,9 +161,6 @@ public class WorkersActivity extends Activity {
             listaWP.add(objeto);
         }
 
-        /*adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_multiple_choice, employments);*/
-
         WorkersAdapter workersAdapter= new WorkersAdapter(WorkersActivity.this,
                 R.layout.list_workers,listaWP ,1);
         lista.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -172,7 +170,6 @@ public class WorkersActivity extends Activity {
 
     public String [] populateWorkers(String query){
         String[] work_centers;
-
         final ArrayList<HashMap<String, String>> results;
         results= Utils.exeLocalQuery(this,query);
         work_centers=new String[results.size()];
@@ -185,23 +182,6 @@ public class WorkersActivity extends Activity {
                 num_employ[i]=results.get(i).get("emp_num_emp");
             }
         }
-        /*List<WorkersModel> listaWP = new ArrayList<WorkersModel>();
-
-        for (int i=0; i< work_centers.length; i++) {
-            String nameWorker = "", numberWorker = "";
-            nameWorker = work_centers[i][0];
-            numberWorker = work_centers[i][1];
-            WorkersModel objeto = new WorkersModel(nameWorker, numberWorker);
-            listaWP.add(objeto);
-        }*/
-
-        /*adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_multiple_choice, employments);*/
-
-        /*WorkersAdapter workersAdapter= new WorkersAdapter(WorkersActivity.this,
-                R.layout.list_workers,listaWP ,1);
-        lista.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        lista.setAdapter(workersAdapter);*/
         employments=work_centers;
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, employments);

@@ -40,9 +40,8 @@ public class AuditP1Activity extends Activity implements OnClickListener{
     private int day;
     private int month;
     private int year;
-    private Button fecha_wc,boton_wc, btTypeAudit, btRegion, btnArea;
+    private Button fecha_wc, btTypeAudit, btRegion, btnArea;
     private SharedPreferences preferences;
-    private String worcCenter, departament;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
         year = cal.get(Calendar.YEAR);
         fecha_wc.setOnClickListener(this);
 
-        Button btnWorkplace=(Button) findViewById(R.id.boton_wc);
+        final Button btnWorkplace=(Button) findViewById(R.id.boton_wc);
         Button btnDepartments=(Button) findViewById(R.id.boton_depto);
         Button btnContinue=(Button) findViewById(R.id.button_wc_continue);
         preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
@@ -112,6 +111,11 @@ public class AuditP1Activity extends Activity implements OnClickListener{
 
         btRegion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                SharedPreferences.Editor editor = preferences.edit();
+                //variables prim pantalla
+                editor.putString("worc_center", "");
+                editor.commit();
+                btnWorkplace.setText("Centro Trabajo");
                 Intent intent =
                         new Intent(AuditP1Activity.this, GeneralContainerActivity.class);
                 intent.putExtra("query","SELECT reg_id, reg_desc FROM region");
@@ -151,15 +155,30 @@ public class AuditP1Activity extends Activity implements OnClickListener{
 
         btnWorkplace.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent =
-                        new Intent(AuditP1Activity.this, WorkCentersActivity.class);
-                startActivity(intent);
-                finish();
+                int reg_id=0;
+                if(null!=preferences.getString("reg_id", "")) {
+                    if(preferences.getString("reg_id", "").length()>0)
+                        reg_id=Integer.parseInt(preferences.getString("reg_id", ""));
+                }
+
+                if(reg_id>0){
+                    Intent intent =
+                            new Intent(AuditP1Activity.this, WorkCentersActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(AuditP1Activity.this, "Debe de seleccionar una región antes que el área", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         btnDepartments.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    //variables prim pantalla
+                    editor.putString("area", "");
+                    editor.commit();
+                    btnArea.setText("Area");
                     Intent intent =
                             new Intent(AuditP1Activity.this, GeneralContainerActivity.class);
                     intent.putExtra("query","SELECT dep_id, dep_desc FROM departamento");
@@ -175,9 +194,49 @@ public class AuditP1Activity extends Activity implements OnClickListener{
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent =
+                int ctaOpc=0;
+                if(null!=preferences.getString("worc_center", "")) {
+                    if(preferences.getString("worc_center", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("departament", "")) {
+                    if(preferences.getString("departament", "").length()>0)
+                        ctaOpc++;
+                }
+                if(null!=preferences.getString("tipoauditoria", "")) {
+                    if(preferences.getString("tipoauditoria", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("region", "")) {
+                    if(preferences.getString("region", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("area", "")) {
+                    if(preferences.getString("area", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("audit_date", "")) {
+                    if(preferences.getString("audit_date", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("audit_week", "")) {
+                    if(preferences.getString("audit_week", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+
+                if(ctaOpc==7){
+                    Intent intent =
                         new Intent(AuditP1Activity.this, AuditP2Activity.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(AuditP1Activity.this, "Le faltan datos por seleccionar ", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -230,8 +289,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
         }
     };
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

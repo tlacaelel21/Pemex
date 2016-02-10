@@ -36,8 +36,8 @@ public class SplashActivity extends Activity {
 
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(
-                        //SplashActivity.this, SyncronizationActivity.class);
-                        SplashActivity.this, MainActivity.class);
+                        SplashActivity.this, SyncronizationActivity.class);
+                        //SplashActivity.this, MainActivity.class);
                 startActivity(mainIntent);
 
                 // Close the activity so the user won't able to go back this

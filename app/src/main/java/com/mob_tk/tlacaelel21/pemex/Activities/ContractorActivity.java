@@ -54,8 +54,7 @@ public class ContractorActivity extends Activity {
         close=(ImageButton) findViewById(R.id.image_close);
         btnAddW=(Button) findViewById(R.id.btn_add_workers);
 
-        //searchWorkers("SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado");
-        populateWorkers("SELECT con_id, con_nombre  FROM contratista WHERE con_status=1");
+        populateWorkers("SELECT con_id, con_nombre,con_contacto  FROM contratista WHERE con_status=1");
 
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -108,17 +107,19 @@ public class ContractorActivity extends Activity {
 
                 Intent intent =
                         new Intent(ContractorActivity.this, AuditP2Activity.class);
-                /*Bundle b = new Bundle();
-                b.putStringArray("numCont", num_employ);
-                b.putString("conts", "" + selectedItems.size());
-                intent.putExtras(b);*/
                 startActivity(intent);
                 finish();
                 /** ****************************************************/
             }
         });
-
-
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public String[] populateWorkers(String query){
@@ -136,23 +137,6 @@ public class ContractorActivity extends Activity {
                 num_employ[i]=results.get(i).get("con_id");
             }
         }
-        /*List<WorkersModel> listaWP = new ArrayList<WorkersModel>();
-
-        for (int i=0; i< work_centers.length; i++) {
-            String nameWorker = "", numberWorker = "";
-            nameWorker = work_centers[i][0];
-            numberWorker = work_centers[i][1];
-            WorkersModel objeto = new WorkersModel(nameWorker, numberWorker);
-            listaWP.add(objeto);
-        }*/
-
-        /*adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_multiple_choice, employments);*/
-
-        /*WorkersAdapter workersAdapter= new WorkersAdapter(ContractorActivity.this,
-                R.layout.list_workers,listaWP ,1);
-        lista.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        lista.setAdapter(workersAdapter);*/
         employments=work_centers;
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, employments);

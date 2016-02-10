@@ -36,7 +36,7 @@
                 android:id="@+id/tv_acto_inseg"
                 android:textColor="@color/colorInputLogin"/>
             <ImageButton
-                android:layout_width="wrap_content"
+                android:layout_width="18dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/imgBSave"
                 android:layout_marginTop="20dp"

@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +37,7 @@ public class GeneralContainerActivity extends Activity {
     TextView gralTitle;
     String titulo, query, campo, clave, tipo;
     int procede=0;
-
+    ImageButton imgBack;
 
     private String listview_array[];
     @Override
@@ -49,6 +51,7 @@ public class GeneralContainerActivity extends Activity {
         lista = (ListView) findViewById(R.id.gral_list);
         buscador=(EditText)findViewById(R.id.txt_gral_search);
         gralTitle=(TextView)findViewById(R.id.gral_title);
+        imgBack=(ImageButton) findViewById(R.id.imgBack);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -108,13 +111,31 @@ public class GeneralContainerActivity extends Activity {
                 editor.putString(tipo, "" + lista.getItemAtPosition(position));
                 editor.putString(clave, "" + results.get(position).get(clave));
                 editor.commit();
-                if(procede==1){
-                Intent intent =
-                        new Intent(GeneralContainerActivity.this, AuditP1Activity.class);
-                startActivity(intent);
-                finish();
+                if (procede == 1) {
+                    Intent intent =
+                            new Intent(GeneralContainerActivity.this, AuditP1Activity.class);
+                    startActivity(intent);
+                    finish();
                 }
-                if(procede==2){
+                if (procede == 2) {
+                    Intent intent =
+                            new Intent(GeneralContainerActivity.this, AuditP2Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (procede == 1) {
+                    Intent intent =
+                            new Intent(GeneralContainerActivity.this, AuditP1Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                if (procede == 2) {
                     Intent intent =
                             new Intent(GeneralContainerActivity.this, AuditP2Activity.class);
                     startActivity(intent);
@@ -123,4 +144,13 @@ public class GeneralContainerActivity extends Activity {
             }
         });
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

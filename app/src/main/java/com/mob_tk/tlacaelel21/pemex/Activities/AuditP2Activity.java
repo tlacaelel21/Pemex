@@ -1,15 +1,19 @@
 package com.mob_tk.tlacaelel21.pemex.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mob_tk.tlacaelel21.pemex.R;
 
@@ -51,12 +55,6 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
 
         if(null!=preferences.getString("nums", "")) {
             if(preferences.getString("nums", "").length()>0){
-                /*int size = preferences.getInt("employ_size", 0);
-                String array[] = new String[size];
-                for (int i = 0;i<size;i++) {
-                    array[i] = preferences.getString("employ_" + i, null);
-                    Log.i("employ",""+array[i]);
-                }*/
                 btnWorkers.setText("Trabajadores("+preferences.getString("nums", "")+")");
             }
         }
@@ -77,25 +75,43 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
             }
         }
 
-       /* activity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            public void onFocusChange(View v, boolean hasFocus) {*/
-                //if (!hasFocus) {
-//                    Log.i("ACTY","LOSE FOCUS");
-
-            /*    //}
-            }
-        });*/
-
         btnInst.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                String ctr_id="0";
+                if(null!=preferences.getString("ctr_id", "")) {
+                    if(preferences.getString("ctr_id", "").length()>0){
+                        ctr_id=preferences.getString("ctr_id", "");
+                    }
+                }
                 Intent intent =
                         new Intent(AuditP2Activity.this, GeneralContainerActivity.class);
-                intent.putExtra("query","SELECT inst_id, inst_desc FROM instalacion WHERE ctr_id=18");
+                intent.putExtra("query","SELECT inst_id, inst_desc FROM instalacion WHERE ctr_id="+ctr_id);
                 intent.putExtra("titulo","Instalaciones");
                 intent.putExtra("campo","inst_desc");
                 intent.putExtra("clave","inst_id");
                 intent.putExtra("tipo","instalaciones");
                 intent.putExtra("procede","2");
+                startActivity(intent);
+                finish();
+            }
+        });
+        //Jefes
+        btnBoss.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //Log.i("BOTON","ENTRO AL BOSS");
+                SharedPreferences preferences;
+                preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("actividad", ""+activity.getText());
+                editor.commit();
+                Intent intent =
+                        new Intent(AuditP2Activity.this, GeneralContainerActivity.class);
+                intent.putExtra("query","SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado WHERE emp_puesto like ('%jefe%')");
+                intent.putExtra("titulo","Jefes");
+                intent.putExtra("campo","nombre");
+                intent.putExtra("clave","emp_num_emp");
+                intent.putExtra("tipo", "jefes");
+                intent.putExtra("procede", "2");
                 startActivity(intent);
                 finish();
             }
@@ -120,7 +136,7 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
                 SharedPreferences preferences;
                 preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("actividad", ""+activity.getText());
+                editor.putString("actividad", "" + activity.getText());
                 editor.commit();
                 Intent intent =
                         new Intent(AuditP2Activity.this, ContractorActivity.class);
@@ -129,33 +145,42 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
             }
         });
 
-        btnBoss.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                //Log.i("BOTON","ENTRO AL BOSS");
-                SharedPreferences preferences;
-                preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("actividad", ""+activity.getText());
-                editor.commit();
-                Intent intent =
-                        new Intent(AuditP2Activity.this, GeneralContainerActivity.class);
-                intent.putExtra("query","SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado WHERE emp_puesto like ('%jefe%')");
-                intent.putExtra("titulo","Jefes");
-                intent.putExtra("campo","nombre");
-                intent.putExtra("clave","emp_num_emp");
-                intent.putExtra("tipo","jefes");
-                intent.putExtra("procede","2");
-                startActivity(intent);
-                finish();
-            }
-        });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent =
-                        new Intent(AuditP2Activity.this, UnsafeActActivity.class);
-                startActivity(intent);
-                finish();
+                int ctaOpc=0;
+                if(null!=preferences.getString("instalaciones", "")) {
+                    if(preferences.getString("instalaciones", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("nums", "")) {
+                    if(preferences.getString("nums", "").length()>0)
+                        ctaOpc++;
+                }
+                if(null!=preferences.getString("conts", "")) {
+                    if(preferences.getString("conts", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("jefes", "")) {
+                    if(preferences.getString("jefes", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(null!=preferences.getString("actividad", "")) {
+                    if(preferences.getString("actividad", "").length()>0){
+                        ctaOpc++;
+                    }
+                }
+                if(ctaOpc==5){
+                    Intent intent =
+                            new Intent(AuditP2Activity.this, UnsafeActActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(AuditP2Activity.this, "Le faltan datos por seleccionar ", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -171,5 +196,13 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         showDialog(0);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

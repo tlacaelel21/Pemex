@@ -38,7 +38,6 @@ public class MainActivity extends Activity {
         numEmp=(EditText)findViewById(R.id.num_emp);
         psw=(EditText)findViewById(R.id.psw);
 
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String nEmp=numEmp.getText().toString().trim();

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -102,7 +103,7 @@ public class UnsafeActActivity extends ExpandableListActivity {
     	  /* each group need each HashMap-Here for each group we have 3 subgroups */
             String query="SELECT ai_id, ai_desc, ai_identificador  FROM actoinseguro " +
                     " WHERE ai_id_padre ="+dataQuery1.get(i).get("ai_id")+" AND ai_status=1 ORDER BY ai_orden ";
-            Log.i("Query2",""+query);
+            Log.i("Query2", "" + query);
             final ArrayList<HashMap<String, String>> dataQuery;
             dataQuery= Utils.exeLocalQuery(this, query);
             Log.i("ItemTAM-->",""+dataQuery.size());
@@ -143,7 +144,6 @@ public class UnsafeActActivity extends ExpandableListActivity {
                 for (int i = 0;i<size;i++) {
                     array[i] = preferences.getString("employ_" + i, null);
                     idsEmpl=idsEmpl+","+array[i];
-                    Log.i("employers",""+array[i]);
                 }
             }
         }
@@ -169,5 +169,13 @@ public class UnsafeActActivity extends ExpandableListActivity {
         }catch(Exception e){
             Log.i("UNS", " groupPosition Errrr +++ " + e.getMessage());
         }*/
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

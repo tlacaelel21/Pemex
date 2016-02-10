@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.mob_tk.tlacaelel21.pemex.Adapter.WorkCenterAdapter;
@@ -38,6 +39,8 @@ public class WorkCentersActivity extends Activity {
     private ArrayList<String> array_sort = new ArrayList<String>();
     int textlength = 0;
     ListView lista;
+    ImageButton imgBack;
+    private SharedPreferences preferences;
 
     private String listview_array[];
     @Override
@@ -50,10 +53,17 @@ public class WorkCentersActivity extends Activity {
         final Context context=getApplicationContext();
         lista = (ListView) findViewById(R.id.list_wc);
         buscador=(EditText)findViewById(R.id.txt_busca_wc);
+        preferences = getSharedPreferences("pemex_prefs", MODE_PRIVATE);
+        imgBack=(ImageButton) findViewById(R.id.imgBack);
 
         /**Se realiza la consulta a la base de datos */
+        int reg_id=0;
+        if(null!=preferences.getString("reg_id", "")) {
+            if(preferences.getString("reg_id", "").length()>0)
+                reg_id=Integer.parseInt(preferences.getString("reg_id", ""));
+        }
         final ArrayList<HashMap<String, String>> results;
-        results=Utils.exeLocalQuery(this, "select ctr_id, ctr_desc, reg_id from centrotrabajo");
+        results=Utils.exeLocalQuery(this, "select ctr_id, ctr_desc, reg_id from centrotrabajo  WHERE reg_id="+reg_id);
         listview_array=new String[results.size()];
         for(int idx=0;idx<results.size();idx++){
             listview_array[idx]=results.get(idx).get("ctr_desc");
@@ -95,8 +105,17 @@ public class WorkCentersActivity extends Activity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("worc_center", "" + lista.getItemAtPosition(position));
                 editor.putString("ctr_id", "" + results.get(position).get("ctr_id"));
-
                 editor.commit();
+                Intent intent =
+                        new Intent(WorkCentersActivity.this, AuditP1Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent =
                         new Intent(WorkCentersActivity.this, AuditP1Activity.class);
                 startActivity(intent);
@@ -105,5 +124,12 @@ public class WorkCentersActivity extends Activity {
         });
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
