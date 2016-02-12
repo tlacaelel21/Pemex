@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
     public static String NAMESPACE = "PEMEXSPACE";
     EditText numEmp, psw;
     Button loginButton,recoveryButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,7 +77,10 @@ public class MainActivity extends Activity {
         valorEnc=valorEnc.replaceAll("\\+", "%2B");
         valorEnc=valorEnc.replaceAll("\\/", "%2F");
         Log.i("ENC", MainActivity.this.getString(R.string.base_url)+valorEnc);
+
     }
+
+
     private boolean userQuery(String numEmp, String psw){
         boolean ingreso=false;
         int idUsuario=0;
@@ -116,4 +120,7 @@ public class MainActivity extends Activity {
         }*/
         return ingreso;
     }
+
+
+
 }

@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'pemex.keystore'
+            keyPassword 'mobtk2015'
+            storeFile file('/Users/gabo/Documents/2.MOBTK/Proyectos/Pemex/Android/pemex.jks')
+            storePassword 'mobtk2015'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.0"
-
     defaultConfig {
         applicationId "com.mob_tk.tlacaelel21.pemex"
         minSdkVersion 19
@@ -22,6 +29,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.googlecode.android-query:android-query:0.25.9'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
 }

@@ -10,6 +10,14 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
+    <permission android:name="com.example.gcm.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+
+
 
     <application
         android:allowBackup="true"
@@ -196,6 +204,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
         </activity>
+
+        <receiver
+            android:name=".Utilities.GcmBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.mob_tk.tlacaelel21.pemex" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".Utilities.GcmIntentService" />
 
     </application>
 
