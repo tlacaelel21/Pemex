@@ -145,6 +145,7 @@ public class Utils {
             final String QUERY_PARAM = "cod";
             String parametro = c.encriptar(idServicio);
             parametro = parametro.replaceAll("\\+", "%2B");
+            parametro = parametro.replaceAll("\n+", "");
 
             String builtUri = BASE_URL + "" + parametro;
             Log.i("SERV", "" + builtUri);

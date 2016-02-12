@@ -51,7 +51,8 @@ public class ConsultaTask {
                 "tipoauditoria",
                 "usuario",
                 "calificacion",
-                "instalacion"
+                "instalacion",
+                "comunicacion"
         };
 
 
@@ -181,6 +182,11 @@ public class ConsultaTask {
                 Log.i("TAM",""+listFields.size());
                 listFields.remove(10);
             }
+            if(table.equals("comunicacion")){
+                Log.i("TAM",""+listFields.size());
+                listFields.remove(listFields.size()-1);
+            }
+
             //}
             return  listFields;
         }
@@ -361,6 +367,16 @@ public class ConsultaTask {
                             "'" + dateConverter(tuple.get(listFields.get(5).toString())) + "',"+
                             "'" + dateConverter(tuple.get(listFields.get(6).toString())) + "')";
                 break;
+                case 15:                //comunicacion
+                    queryValues =queryValues+"(" + tuple.get(listFields.get(0).toString()) + ","+
+                            "'" + tuple.get(listFields.get(1).toString()) + "',"+
+                            "'" + dateConverter(tuple.get(listFields.get(2).toString())) + "',"+
+                            ""  + tuple.get(listFields.get(3).toString()) + ","+
+                            ""  + tuple.get(listFields.get(4).toString()) + ","+
+                            ""  + tuple.get(listFields.get(5).toString()) + ","+
+                            "'" + dateConverter(tuple.get(listFields.get(6).toString())) + "',"+
+                            "'" + dateConverter(tuple.get(listFields.get(7).toString())) + "')";
+                    break;
             }
             String localQuery = "INSERT INTO " + table + " " + queryValues;
             try {
@@ -383,7 +399,8 @@ public class ConsultaTask {
         fecha = fecha.replace(")/", "");
         Long fechaLlega=Long.parseLong(fecha);
         try{
-            SimpleDateFormat originalFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+            //SimpleDateFormat originalFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = new Date(fechaLlega);
             formatedDate = originalFormat.format(date);
         }catch (Exception e){}
@@ -391,7 +408,8 @@ public class ConsultaTask {
     }
     //mobactualizacion
     public void updateMobAct(){
-        String localQuery = "UPDATE mobactualizacion SET fecha='"+getDate()+"'";
+        //String localQuery = "UPDATE mobactualizacion SET fecha='"+getDate()+"'";
+        String localQuery = "UPDATE mobactualizacion SET fecha=datetime()";
         try {
             Log.i("QUERY_LOCAL-->", ""+localQuery);
             Utils.exeLocalInsQuery(reference, localQuery);

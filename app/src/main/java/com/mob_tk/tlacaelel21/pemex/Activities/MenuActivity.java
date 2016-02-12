@@ -40,8 +40,10 @@ public class MenuActivity extends Activity {
 
         Button btnIniAudit=(Button) findViewById(R.id.boton_audit);
         Button btnPermisos=(Button) findViewById(R.id.boton_permisos);
-
-
+        Button btnGlosario=(Button) findViewById(R.id.boton_glosario);
+        Button btnAlertas=(Button) findViewById(R.id.boton_alertas);
+        Button btnPerfil=(Button) findViewById(R.id.boton_perfil);
+        Button btnComunicacion=(Button) findViewById(R.id.boton_comunicacion);
 
        // Log.i("PREF-->", preferences.getString("emp_nombre", ""));
 
@@ -83,8 +85,40 @@ public class MenuActivity extends Activity {
 
             }
         });
-        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.AlertDialogCustom);
 
+        btnGlosario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, GlosarioActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAlertas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, AlertasActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PerfilActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnComunicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, ComunicacionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.AlertDialogCustom);
         AlertDialog alertDialog = new AlertDialog.Builder(ctw).create();
         //AlertDialog alertDialog = new AlertDialog.Builder(MenuActivity.this).create();
         alertDialog.setTitle("Pemex");

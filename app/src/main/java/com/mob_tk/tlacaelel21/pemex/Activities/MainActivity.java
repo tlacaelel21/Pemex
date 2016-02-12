@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
                 editor.putString("id_usuario_sistema", "" + results.get(0).get("id"));
                 editor.putString("emp_id", "" + results.get(0).get("emp_id"));
                 editor.putString("emp_nombre", "" + results.get(0).get("name"));
+                editor.putString("emp_num", "" + results.get(0).get("emp_num_emp"));
                 editor.commit();
                 //Log.i("ResMain--> ",""+idUsuario);
                 View view = this.getCurrentFocus();
