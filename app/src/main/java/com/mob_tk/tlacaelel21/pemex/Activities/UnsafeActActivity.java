@@ -25,6 +25,7 @@ import java.util.List;
 public class UnsafeActActivity extends ExpandableListActivity {
     TextView tvCab;
     SharedPreferences preferences;
+    String calificaciones[][];
 
     @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState) {
@@ -72,23 +73,14 @@ public class UnsafeActActivity extends ExpandableListActivity {
 
         ArrayList result = new ArrayList();
         boolean paso=false;
-        for( int i = 0 ; i < dataQuery.size() ; ++i ) { // 15 groups........
+        for( int i = 0 ; i < dataQuery.size() ; ++i ) {
             HashMap m = new HashMap();
-            //if(paso!=true) {
-                m.put("group_ai", " " + dataQuery.get(i).get("ai_identificador")+". "+
+                m.put("group_ai", " " + dataQuery.get(i).get("ai_identificador") + ". " +
                         dataQuery.get(i).get("ai_desc")); // the key and it's value.
-                Log.i("GROUP-->",""+dataQuery.get(i).get("ai_desc"));
-                paso=true;
-            /*}else{
-                m.put( "group_ai"," "+i+". EQUIPO DE PROTECCIÓN PERSONAL" ); // the key and it's value.
-                paso=false;
-            }*/
             result.add( m );
         }
-
-        return (List)result;
+        return result;
     }
-
     /* creatin the HashMap for the children */
     @SuppressWarnings("unchecked")
     private List createChildList() {
@@ -98,27 +90,16 @@ public class UnsafeActActivity extends ExpandableListActivity {
         dataQuery1= Utils.exeLocalQuery(this, query1);
 
         ArrayList result = new ArrayList();
-        boolean paso=false;
         for( int i = 0 ; i < dataQuery1.size() ; ++i ) { // this -15 is the number of groups(Here it's fifteen)
     	  /* each group need each HashMap-Here for each group we have 3 subgroups */
             String query="SELECT ai_id, ai_desc, ai_identificador  FROM actoinseguro " +
                     " WHERE ai_id_padre ="+dataQuery1.get(i).get("ai_id")+" AND ai_status=1 ORDER BY ai_orden ";
-            Log.i("Query2", "" + query);
             final ArrayList<HashMap<String, String>> dataQuery;
             dataQuery= Utils.exeLocalQuery(this, query);
-            Log.i("ItemTAM-->",""+dataQuery.size());
             ArrayList secList = new ArrayList();
             for( int n = 0; n < dataQuery.size(); n++ ) {
                 HashMap child = new HashMap();
-                //if(paso!=true) {
-                    Log.i("item-->",""+dataQuery.get(n).get("ai_desc"));
-                    //tvCab.setText(""+dataQuery.get(n).get("ai_identificador"));
-                    child.put("Item", ""+dataQuery.get(n).get("ai_identificador")+". " +dataQuery.get(n).get("ai_desc"));
-                  /*  paso=true;
-                }else{
-                    child.put( "Item", ""+i+(n+1)+" Cambian de posición" );
-                    paso=false;
-                }*/
+                child.put("Item", ""+dataQuery.get(n).get("ai_identificador")+". " +dataQuery.get(n).get("ai_desc"));
                 secList.add( child );
             }
             result.add( secList );
@@ -132,11 +113,27 @@ public class UnsafeActActivity extends ExpandableListActivity {
     /* This function is called on each child click */
     public boolean onChildClick( ExpandableListView parent, View v, int groupPosition,int childPosition,long id) {
        Log.i("UNS", "Inside onChildClick at groupPosition = " + groupPosition + " Child clicked at position " + childPosition);
+        String ai_id="";
+        String titulo=parent.getExpandableListAdapter().getChild(groupPosition, childPosition).toString();
+        titulo=titulo.replaceAll("\\{","");
+        titulo=titulo.replaceAll("\\}","");
+        titulo=titulo.replaceAll("Item=","");
+        String partTits[]=titulo.split("\\.");
+        /**Se realiza la consulta a la base de datos */
+        String queryAI_id="SELECT ai_id  FROM actoinseguro  " +
+                " WHERE ai_identificador='"+partTits[0]+"' AND ai_status=1 ORDER BY ai_orden";
+        final ArrayList<HashMap<String, String>> resultsAI;
+        resultsAI= Utils.exeLocalQuery(this, queryAI_id);
+
+        for(int idx=0;idx<resultsAI.size();idx++){
+            ai_id=resultsAI.get(idx).get("ai_id");
+        }
+        /** ******************************* */
         /*Intent intent =
                 new Intent(UnsafeActActivity.this, PeopleQActivity.class);
         startActivity(intent);*/
         String array[];
-        String idsEmpl="";
+        String idsEmpl="", idsContra="";
         if(null!=preferences.getString("nums", "")) {
             if(preferences.getString("nums", "").length()>0){
                 int size = preferences.getInt("employ_size", 0);
@@ -147,16 +144,32 @@ public class UnsafeActActivity extends ExpandableListActivity {
                 }
             }
         }
+        if(null!=preferences.getString("conts", "")) {
+            if(preferences.getString("conts", "").length()>0){
+                int size = preferences.getInt("conts_size", 0);
+                array = new String[size];
+                for (int i = 0;i<size;i++) {
+                    array[i] = preferences.getString("conts_" + i, null);
+                    idsContra=idsContra+","+array[i];
+                }
+            }
+        }
         idsEmpl=idsEmpl.substring(1,idsEmpl.length());
-        Log.i("employers",""+idsEmpl);
+        idsContra=idsContra.substring(1,idsContra.length());
+        //Log.i("employers", "" + idsEmpl);
+        Utils.setValueSP(UnsafeActActivity.this, "titulo", titulo);
+        Utils.setValueSP(UnsafeActActivity.this, "ai_id", ai_id);
+        String queryEmpCont="SELECT emp_id,emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp "+
+                " FROM empleado WHERE emp_num_emp IN ("+idsEmpl+")"+
+                " UNION "+
+                " SELECT con_id,con_nombre AS nombre, con_contacto FROM contratista WHERE con_id IN ("+idsContra+")";
         Intent intent =
                 new Intent(UnsafeActActivity.this, PeopleQActivity.class);
-        intent.putExtra("query","SELECT emp_nombre|| ' ' ||emp_app|| ' ' ||emp_apm AS nombre,emp_num_emp FROM empleado WHERE emp_num_emp IN ("+idsEmpl+")");
-        intent.putExtra("titulo","Jefes");
+        intent.putExtra("query",queryEmpCont);
+        intent.putExtra("queryContrac","SELECT con_id,con_nombre, con_contacto FROM contratista WHERE con_id IN ("+idsEmpl+")");
         intent.putExtra("campo","nombre");
         intent.putExtra("clave","emp_num_emp");
-        intent.putExtra("tipo","jefes");
-        intent.putExtra("procede","2");
+        //intent.putExtra("ai_id",""+ai_id);
         startActivity(intent);
         finish();
         return true;

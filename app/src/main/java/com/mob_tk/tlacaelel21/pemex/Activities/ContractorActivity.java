@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -101,8 +102,18 @@ public class ContractorActivity extends Activity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("conts", "" + selectedItems.size());
                 editor.putInt("conts_size", num_employ.length);
-                for(int i=0;i<num_employ.length;i++)
-                    editor.putString("conts_" + i, num_employ[i]);
+                for(int i=0;i<num_employ.length;i++){
+                    Log.i("CONTRAC",""+num_employ[i]);
+                    /**Se realiza la consulta a la base de datos */
+                    final ArrayList<HashMap<String, String>> resultsIdsCont;
+                    String queryConts="SELECT con_id FROM contratista WHERE con_contacto='"+num_employ[i]+"'";
+                    resultsIdsCont= Utils.exeLocalQuery(getBaseContext(),queryConts);
+                    for(int idx=0;idx<resultsIdsCont.size();idx++){
+                        editor.putString("conts_" + i, ""+resultsIdsCont.get(idx).get("con_id"));
+                        //Log.i("CAMPO->",results.get(idx).get(campo));
+                    }
+                    /** ******************************* */
+                }
                 editor.commit();
 
                 Intent intent =

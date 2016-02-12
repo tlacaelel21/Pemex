@@ -78,21 +78,23 @@
     <string name="indice_summary_2">Indices de Actos Seguros (IAS):</string>
     <string name="btn_summary_emplo">Listado de empleados</string>
     <string name="btn_summary_act_insec">Listado de actos inseguros</string>
+    <string name="btn_summary_proc">Procedimientos y acciones</string>
     <string name="btn_summary_recom_com">Recomendaciones y compromisos</string>
     <string name="btn_summary_save">Guardar y cerrar auditoría</string>
     <string name="btn_summary_dw_pdf">Descargar PDF</string>
-    <string name="btn_summary_send">Enviar auditoría</string>
+    <string name="btn_summary_send">Terminar</string>
+    <string name="titulo_ai">Listado de actos inseguros</string>
 
     <!--Workers List Content -->
     <string name="title_list_workers_1">Lista de trabajadores</string>
-    <string name="title_list_workers_2">Trabajado</string>
+    <string name="title_list_workers_2">Trabajador</string>
 
     <!--assign unsafe list content -->
     <string name="title_list_assing_1">Ajustan su equipo de protección personal</string>
     <string name="title_list_assing_sub_1">1/3</string>
     <string name="title_list_assing_sub_2">1</string>
     <string name="title_list_assing_sub_3">3</string>
-    <string name="title_list_assing_workers">Trabajador</string>
+    <string name="title_list_assing_workers">Trabajadores</string>
 
     <!--custom dialog -->
     <string name="instruc">Descripción detallada del acto inseguro y de cada semáforo</string>
@@ -103,4 +105,29 @@
     <!--General List Content -->
     <string name="gral_list_title">Titulo</string>
     <string name="gral_list_search">Busca ...</string>
+
+    <!--Procedimientos_Accciones -->
+    <string name="title_pro_ac">Procedimientos y acciones inmediatas</string>
+    <string name="title_pa_1">Procedimiento aplicado en la actividad</string>
+    <string name="title_pa_2">Fortalezas de los trabajadores evaluados</string>
+    <string name="title_pa_3">Acciones inmediatas</string>
+
+    <!--General List Content -->
+    <string name="title_rec_comp">Recomendaciones y compromisos</string>
+
+    <!--New Corrective -->
+    <string name="titulo_new_corr">Nueva Acción Correctiva</string>
+    <string name="tipo">Tipo</string>
+    <string name="btn_rec">Recomendación</string>
+    <string name="btn_com">Compromiso</string>
+    <string name="titulo1">Recomendación al trabajador</string>
+    <string name="titulo2">Compromiso línea de mando</string>
+    <string name="hint_titulo1">La recomendación para el trabajador</string>
+    <string name="fech_comp">Fecha compromiso</string>
+    <string name="realizado">Realizado</string>
+    <string name="evid">Evidencia</string>
+    <string name="hint_evid">La evidencia de que realizó</string>
+    <string name="fech_rea">Fecha realizada</string>
+    <string name="btn_save">Guardar</string>
+
 </resources>

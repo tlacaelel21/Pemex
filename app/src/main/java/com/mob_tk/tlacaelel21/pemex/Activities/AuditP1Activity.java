@@ -115,7 +115,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
                 //variables prim pantalla
                 editor.putString("worc_center", "");
                 editor.commit();
-                btnWorkplace.setText("Centro Trabajo");
+                btnWorkplace.setText("Centro de trabajo");
                 Intent intent =
                         new Intent(AuditP1Activity.this, GeneralContainerActivity.class);
                 intent.putExtra("query","SELECT reg_id, reg_desc FROM region");

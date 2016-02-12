@@ -33,7 +33,7 @@
                 android:layout_marginStart="15dp"
                 android:textSize="14dp"
                 android:text="@string/title_list_assing_1"
-                android:id="@+id/tv_acto_inseg"
+                android:id="@+id/titulo_acto_inseg"
                 android:textColor="@color/colorInputLogin"/>
             <ImageButton
                 android:layout_width="18dp"
@@ -169,7 +169,7 @@
                     android:id="@+id/number_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="99887766554411"
+                    android:text="0"
                     android:textSize="12sp"
                     android:textColor="@color/colorTextBlack"/>
             </LinearLayout>
@@ -219,15 +219,17 @@
 
     <!-- Ayuda-->
     <LinearLayout
+        android:id="@+id/ly_txt_califs"
         android:orientation="vertical"
         android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:paddingRight="5dp"
         android:background="@color/colorButtonMenu"
         android:layout_alignParentBottom="true"
         android:divider="@drawable/divider"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:visibility="invisible">
         <LinearLayout
             android:id="@+id/ly_txt_1"
             android:orientation="horizontal"
@@ -235,7 +237,8 @@
             android:layout_height="40dp"
             android:clickable="true"
             android:paddingRight="15dp"
-            android:background="@color/colorButtonMenu">
+            android:background="@color/colorButtonMenu"
+            android:visibility="invisible">
                 <TextView
                     android:id="@+id/calif_1"
                     android:layout_width="40dp"
@@ -244,17 +247,18 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:gravity="center_vertical"
-                    android:text="1"
+                    android:text="1/3"
                     android:textSize="15sp"
                     android:textColor="@color/colorInputLogin"
-                    android:background="@color/colorButtonMenu"/>
+                    android:background="@color/colorButtonMenu"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:id="@+id/calif_text_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
-                    android:text="No consiguio el material adecuadamente por que no llego a tiempo por el tipo de accion que hizo lo que no pudo realizár"
+                    android:text=""
                     android:gravity="center_vertical"
                     android:textSize="15sp"
                     android:textColor="@color/colorInputLogin"
@@ -272,7 +276,7 @@
             android:paddingRight="15dp"
             android:paddingTop="6dp"
             android:background="@color/colorButtonMenu"
-            >
+            android:visibility="invisible">
             <TextView
                 android:id="@+id/calif_2"
                 android:layout_width="40dp"
@@ -281,17 +285,18 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="2"
+                android:text="1"
                 android:textSize="15sp"
                 android:textColor="@color/colorInputLogin"
-                android:background="@color/colorButtonMenu"/>
+                android:background="@color/colorButtonMenu"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/calif_text_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Descripción del riesgo"
+                android:text=""
                 android:gravity="center_vertical"
                 android:textSize="15sp"
                 android:textColor="@color/colorInputLogin"
@@ -309,7 +314,7 @@
             android:paddingRight="15dp"
             android:paddingTop="6dp"
             android:background="@color/colorButtonMenu"
-            >
+            android:visibility="invisible">
             <TextView
                 android:id="@+id/calif_3"
                 android:layout_width="40dp"
@@ -321,14 +326,15 @@
                 android:text="3"
                 android:textSize="15sp"
                 android:textColor="@color/colorInputLogin"
-                android:background="@color/colorButtonMenu"/>
+                android:background="@color/colorButtonMenu"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/calif_text_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Descripción del riesgo"
+                android:text=""
                 android:gravity="center_vertical"
                 android:textSize="15sp"
                 android:textColor="@color/colorInputLogin"

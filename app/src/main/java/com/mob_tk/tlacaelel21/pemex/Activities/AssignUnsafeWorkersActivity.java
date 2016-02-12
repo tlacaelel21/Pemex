@@ -3,8 +3,10 @@ package com.mob_tk.tlacaelel21.pemex.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,6 +33,8 @@ import com.mob_tk.tlacaelel21.pemex.Utilities.MyCustomDialog;
 import com.mob_tk.tlacaelel21.pemex.Utilities.MyCustomDialog.onSubmitListener;
 import com.mob_tk.tlacaelel21.pemex.Utilities.Utils;
 
+import org.json.JSONArray;
+
 /**
  * Created by tlacaelel21 on 1/11/15.
  */
@@ -38,18 +42,20 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
     private String listview_array[];
     LinearLayout linearLayoutCal1;
     LinearLayout linearLayoutCal2;
-    LinearLayout linearLayoutCal3;
+    LinearLayout linearLayoutCal3, linearLayoutCalifs;
     CheckBox chkGreen;
     CheckBox chkYell;
     CheckBox chkRed;
-    TextView text1, text2,text3;
+    TextView text1, text2,text3,tituloActoI, tvNumEmp, tvNomEmp,calif1,calif2,calif3;
     EditText comment;
     ImageButton imageButtonSave;
-    String query;
+    String query,ai_id,titulo,empNum, nomEmp,empId;
     String suggestions[];
+    String calificaciones[][];
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
-
         // Set portrait orientation
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -59,6 +65,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         linearLayoutCal1=(LinearLayout) findViewById(R.id.ly_txt_1);
         linearLayoutCal2=(LinearLayout) findViewById(R.id.ly_txt_2);
         linearLayoutCal3=(LinearLayout) findViewById(R.id.ly_txt_3);
+        linearLayoutCalifs=(LinearLayout) findViewById(R.id.ly_txt_califs);
 
         chkGreen=(CheckBox) findViewById(R.id.chk_worker_1);
         chkYell=(CheckBox) findViewById(R.id.chk_worker_2);
@@ -70,6 +77,13 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         text1=(TextView) findViewById(R.id.calif_text_1);
         text2=(TextView) findViewById(R.id.calif_text_2);
         text3=(TextView) findViewById(R.id.calif_text_3);
+        calif1=(TextView) findViewById(R.id.calif_1);
+        calif2=(TextView) findViewById(R.id.calif_2);
+        calif3=(TextView) findViewById(R.id.calif_3);
+
+        tituloActoI=(TextView) findViewById(R.id.titulo_acto_inseg);
+        tvNumEmp=(TextView) findViewById(R.id.number_worker);
+        tvNomEmp=(TextView) findViewById(R.id.name_worker);
 
         comment=(EditText) findViewById(R.id.texto_coment);
 
@@ -78,18 +92,20 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             query=extras.getString("query");
+            ai_id=extras.getString("ai_id");
+            titulo=extras.getString("titulo");
+            empNum=extras.getString("emp_num_emp");
+            nomEmp=extras.getString("nombre");
+            empId=extras.getString("emp_id");
         }
+        tituloActoI.setText(titulo);
+        tvNumEmp.setText(empNum);
+        tvNomEmp.setText(nomEmp);
 
         /**Se realiza la consulta a la base de datos */
         final ArrayList<HashMap<String, String>> results;
         results= Utils.exeLocalQuery(this, query);
-        //Log.i("TAM->",""+results.size());
         listview_array=new String[results.size()];
-        /*for(int idx=0;idx<results.size();idx++){
-            listview_array[idx]=results.get(idx).get("campo");
-            Log.i("CAMPO->", results.get(idx).get(""));
-        }*/
-        /** ******************************* */
 
         String[][] work_centers=new String[results.size()][2];
 
@@ -101,9 +117,8 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                     work_centers[i][j]=results.get(i).get("emp_num_emp");
             }
         }
-
+        /** ******************************* */
         List<WorkersModel> listaWP = new ArrayList<WorkersModel>();
-
         for (int i=0; i< work_centers.length; i++) {
             String nameWorker = "", numberWorker = "";
             nameWorker = work_centers[i][0];
@@ -111,40 +126,6 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
             WorkersModel objeto = new WorkersModel(nameWorker, numberWorker);
             listaWP.add(objeto);
         }
-
-        /*ListView lista = (ListView) findViewById(R.id.list_assign_unsafe);
-        AssignUnsafeWorkersAdapter assignUnsafeWorkersAdapter= new AssignUnsafeWorkersAdapter(context,
-                R.layout.list_assign_unsafe,listaWP);
-        lista.setAdapter(assignUnsafeWorkersAdapter);*/
-
-        imageButtonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               String queryInsert="SELECT MAX(ae_id) as ae_id FROM auditoriaai";
-                /**Se realiza la consulta a la base de datos */
-                final ArrayList<HashMap<String, String>> resultsMax;
-                resultsMax= Utils.exeLocalQuery(AssignUnsafeWorkersActivity.this, query);
-                //Log.i("TAM->",""+results.size());
-                int idMax=1;
-                for(int idx=0;idx<resultsMax.size();idx++){
-                    if(null!=resultsMax.get(idx).get("ae_id")){
-                        idMax=Integer.parseInt(resultsMax.get(idx).get("ae_id"));
-                        Log.i("CAMPO->", resultsMax.get(idx).get("ae_id"));
-                    }
-                }
-                /** ******************************* */
-
-                String querySel="";
-               // Utils.exeLocalInsQuery(getApplicationContext(),"");
-                Intent intent =
-                        new Intent(AssignUnsafeWorkersActivity.this, PeopleQActivity.class);
-                intent.putExtra("query",""+query);
-                intent.putExtra("campo","nombre");
-                intent.putExtra("clave","emp_num_emp");
-                startActivity(intent);
-                finish();
-            }
-        });
 
         chkGreen.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -174,6 +155,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                 chkRed.setButtonDrawable(R.drawable.target_b);
                 chkYell.setButtonDrawable(R.drawable.target_b);
                 comment.setText(text1.getText());
+                chkGreen.setChecked(true);
             }
         });
         linearLayoutCal2.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +165,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                 chkRed.setButtonDrawable(R.drawable.target_b);
                 chkYell.setButtonDrawable(R.drawable.target_yellow);
                 comment.setText(text2.getText());
+                chkYell.setChecked(true);
             }
         });
         linearLayoutCal3.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +175,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                 chkRed.setButtonDrawable(R.drawable.target_red);
                 chkYell.setButtonDrawable(R.drawable.target_b);
                 comment.setText(text3.getText());
+                chkRed.setChecked(true);
             }
         });
 
@@ -222,32 +206,77 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
         });
 
         /**Se realiza la consulta a la base de datos */
-        String query="SELECT sai_id, sai_desc,sai_calificacion FROM sugerenciaai " +
-                " WHERE  sai_status=1";//AND ai_id=2
-        Log.i("QUERY_PQ",""+query);
+        final String querySug="SELECT sai_id, sai_desc,sai_calificacion FROM sugerenciaai " +
+                " WHERE  sai_status=1 AND ai_id="+ai_id;
+        Log.i("QUERY_PQ",""+querySug);
         final ArrayList<HashMap<String, String>> resultsSug;
-        resultsSug= Utils.exeLocalQuery(this, query);
+        resultsSug= Utils.exeLocalQuery(this, querySug);
         suggestions=new String[3];
+        int contador=0;
         for(int idx=0;idx<resultsSug.size();idx++){
-            Log.i("Sugg","-> "+resultsSug.get(idx).get("sai_calificacion"));
             if(null!=resultsSug.get(idx).get("sai_calificacion")){
                 if(resultsSug.get(idx).get("sai_calificacion").equals("1")){
+                    calif1.setVisibility(View.VISIBLE);
+                    linearLayoutCal1.setVisibility(View.VISIBLE);
                     text1.setText("" + resultsSug.get(idx).get("sai_desc"));
+                    contador++;
                 }
             }
             if(null!=resultsSug.get(idx).get("sai_calificacion")){
                 if(resultsSug.get(idx).get("sai_calificacion").equals("2")){
-                    text2.setText(""+resultsSug.get(idx).get("sai_desc"));
+                    calif2.setVisibility(View.VISIBLE);
+                    linearLayoutCal2.setVisibility(View.VISIBLE);
+                    text2.setText("" + resultsSug.get(idx).get("sai_desc"));
+                    contador++;
                 }
             }
             if(null!=resultsSug.get(idx).get("sai_calificacion")){
                 if(resultsSug.get(idx).get("sai_calificacion").equals("3")){
-                    text3.setText(""+resultsSug.get(idx).get("sai_desc"));
+                    calif3.setVisibility(View.VISIBLE);
+                    linearLayoutCal3.setVisibility(View.VISIBLE);
+                    text3.setText("" + resultsSug.get(idx).get("sai_desc"));
+                    contador++;
                 }
             }
         }
+        if(contador>0)
+            linearLayoutCalifs.setVisibility(View.VISIBLE);
 
+        imageButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String calif="0", descri;
+                if(chkGreen.isChecked())
+                    calif="1";
+                if(chkYell.isChecked())
+                    calif="2";
+                if(chkRed.isChecked())
+                    calif="3";
+                descri=comment.getText().toString();
+                Intent intent =
+                        new Intent(AssignUnsafeWorkersActivity.this, PeopleQActivity.class);
+                intent.putExtra("query", "" + query);
+                intent.putExtra("campo", "nombre");
+                intent.putExtra("clave", "emp_num_emp");
+                startActivity(intent);
+                finish();
+                if(!calif.equals("0"))
+                    insertCalif(ai_id, empId, calif, descri, "",empNum);
+            }
+        });
     }
+    /** Agregando a la BDLocal las calificaciones*/
+    public void insertCalif(String id_acto_inseguro,String id_emp,String calif,String descri,String foto,String num_emp){
+        String localQuery = "INSERT INTO calificaciones (id_acto_inseguro,id_emp,calif,descri,foto,num_emp)"+
+                " VALUES('"+id_acto_inseguro+"','"+id_emp+"','"+calif+"','"+descri+"','"+foto+"','"+num_emp+"')";
+        try {
+            Log.i("QUERY_LOCAL-->", ""+localQuery);
+            Utils.exeLocalInsQuery(getBaseContext(), localQuery);
+        } catch(Exception E) {
+
+        }
+    }
+
     @Override
     public void setOnSubmitListener(String arg) {
         //mTextView.setText(arg);

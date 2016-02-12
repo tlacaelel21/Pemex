@@ -23,15 +23,33 @@ public class AuditSummary extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audit_summary);
-        Button aButton = (Button)findViewById(R.id.boton_employ);
-        Button btnRecCom = (Button)findViewById(R.id.boton_recom_com);
+        Button btnEmp = (Button)findViewById(R.id.boton_employ);
+        Button btnActIns = (Button)findViewById(R.id.boton_act_insec);
         Button btnSend = (Button)findViewById(R.id.btn_summary_send);
+        Button btnProcAcc = (Button)findViewById(R.id.boton_proced);
+        Button btnRecCom = (Button)findViewById(R.id.boton_recom_com);
 
 
-        aButton.setOnClickListener(new View.OnClickListener() {
+        btnEmp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent =
                         new Intent(AuditSummary.this, WorkersListBActivity.class);
+                intent.putExtra("tipo","1");
+                startActivity(intent);
+            }
+        });
+        btnActIns.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent =
+                        new Intent(AuditSummary.this, ActInsSummaryActivity.class);
+                intent.putExtra("tipo","1");
+                startActivity(intent);
+            }
+        });
+        btnProcAcc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent =
+                        new Intent(AuditSummary.this, ProcedureActionActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,6 +57,7 @@ public class AuditSummary extends Activity {
             public void onClick(View view) {
                 Intent intent =
                         new Intent(AuditSummary.this, WorkersListBActivity.class);
+                intent.putExtra("tipo","2");
                 startActivity(intent);
             }
         });

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.mob_tk.tlacaelel21.pemex.R;
+import com.mob_tk.tlacaelel21.pemex.Utilities.Utils;
 
 /**
  * Created by tlacaelel21 on 20/10/15.
@@ -66,26 +67,11 @@ public class MenuActivity extends Activity {
                 editor.putString("conts","");
                 editor.putString("jefes","");
                 editor.putString("actividad", "");
-               /* if(null!=(""+preferences.getInt("employ_size", 0))){
-                    if((""+preferences.getInt("employ_size", 0)).length()>0){
-                        int size = preferences.getInt("employ_size", 0);
-                        for (int i = 0;i<size;i++) {
-                            editor.putString("employ_" + i, "");
-                        }
-                    }
-                }
-                if(null!=(""+preferences.getInt("conts_size", 0))){
-                    if((""+preferences.getInt("conts_size", 0)).length() >0){
-                        int size = preferences.getInt("conts_size", 0);
-                        for (int i = 0;i<size;i++) {
-                            editor.putString("conts_" + i, "");
-                        }
-                    }
-                }*/
                 editor.putString("employ_size","");
                 editor.putString("conts_size","");
                 editor.clear();
                 editor.commit();
+                clearCalif();
                 Intent intent =
                         new Intent(MenuActivity.this, AuditP1Activity.class);
                 startActivity(intent);
@@ -110,5 +96,15 @@ public class MenuActivity extends Activity {
                     }
                 });
         alertDialog.show();
+    }
+    /** Agregando a la BDLocal las calificaciones*/
+    public void clearCalif(){
+        String localQuery = "DELETE FROM calificaciones";
+        try {
+            Log.i("CLEAR-->", ""+localQuery);
+            Utils.exeLocalInsQuery(getBaseContext(), localQuery);
+        } catch(Exception E) {
+
+        }
     }
 }
