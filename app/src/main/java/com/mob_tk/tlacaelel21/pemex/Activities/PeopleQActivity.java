@@ -112,7 +112,7 @@ public class PeopleQActivity extends Activity {
                 intent.putExtra("campo", "" + campo);
                 intent.putExtra("nombre", "" + results.get(position).get(campo));
                 intent.putExtra("emp_num_emp", "" + results.get(position).get(clave));
-                intent.putExtra("emp_id", "" + results.get(position).get("emp_id"));
+                intent.putExtra("emp_id_calif", "" + results.get(position).get("emp_id"));
                 intent.putExtra("ai_id", "" + ai_id);
                 intent.putExtra("titulo", "" + titulo);
                 startActivity(intent);
@@ -128,5 +128,6 @@ public class PeopleQActivity extends Activity {
                 finish();
             }
         });
+        Log.i("PREF_IDEMP-->","-->"+ preferences.getString("emp_id", ""));
     }
 }

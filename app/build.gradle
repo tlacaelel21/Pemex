@@ -13,7 +13,7 @@ android {
     buildToolsVersion "23.0.0"
     defaultConfig {
         applicationId "com.mob_tk.tlacaelel21.pemex"
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"

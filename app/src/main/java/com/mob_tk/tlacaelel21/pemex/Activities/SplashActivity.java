@@ -17,7 +17,7 @@ import java.util.TimerTask;
  * Created by tlacaelel21 on 20/10/15.
  */
 public class SplashActivity extends Activity {
-    private static final long SPLASH_SCREEN_DELAY = 3000;
+    private static final long SPLASH_SCREEN_DELAY = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class SplashActivity extends Activity {
                 Intent mainIntent = new Intent().setClass(
                         SplashActivity.this, SyncronizationActivity.class);
                         //SplashActivity.this, MainActivity.class);
+                        //SplashActivity.this, AuditSummary.class);
                 startActivity(mainIntent);
 
                 // Close the activity so the user won't able to go back this

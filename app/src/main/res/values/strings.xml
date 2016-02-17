@@ -51,6 +51,7 @@
     <string name="btn_audit_p2_contra">Contratistas (0)</string>
     <string name="btn_audit_p2_area">Jefe auditado</string>
     <string name="button_audit_p2_cont">Continuar</string>
+    <string name="button_cancelar">Cancelar</string>
 
     <!--Workplaces Content-->
     <string name="titulo_list_wc">Centros de trabajo</string>
@@ -129,5 +130,29 @@
     <string name="hint_evid">La evidencia de que realizó</string>
     <string name="fech_rea">Fecha realizada</string>
     <string name="btn_save">Guardar</string>
+
+    <!--General List Content -->
+    <string name="actividad">Actividad</string>
+    <string name="inicio">Inicio</string>
+    <string name="termino">Término</string>
+
+    <!--work permition detail -->
+    <string name="fecha_ejec">Fecha de ejecución</string>
+    <string name="fecha_ejec_ini">Fecha Inicio</string>
+    <string name="fecha_ejec_fin">Fecha Término</string>
+    <string name="descri">Descripción de la actividad</string>
+    <string name="tipo_act">Tipo de actividad</string>
+    <string name="titulo_proc">Procedimiento(s) crítico(s) que aplica(n)</string>
+    <string name="modalidad">Modalidad de ejecución</string>
+    <string name="resp">Responsable</string>
+    <string name="ast">AST (No. de Folio)</string>
+    <string name="per_trab">Permiso de trabajo con riesgo</string>
+    <string name="ord_trab">Orden de trabajo</string>
+    <string name="proc_req">Procedimientos requeridos</string>
+    <string name="obs">Observaciones</string>
+    <string name="esp">Especificación genérica</string>
+
+    <!--Auditorias Realizadas -->
+    <string name="audit_real">Auditorias realizadas</string>
 
 </resources>

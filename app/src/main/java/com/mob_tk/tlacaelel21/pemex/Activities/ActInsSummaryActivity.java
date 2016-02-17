@@ -62,16 +62,29 @@ public class ActInsSummaryActivity extends Activity {
         imageButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =
-                        new Intent(ActInsSummaryActivity.this, AuditSummary.class);
-                startActivity(intent);
-                finish();
+                if(tipo==1){
+                    Intent intent =
+                            new Intent(ActInsSummaryActivity.this, AuditSummary.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Intent intent =
+                            new Intent(ActInsSummaryActivity.this, WorkersListBActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
         });
         /**Llenamos la lsita con los actos inseguros*/
-        String queryEmp="SELECT ai_identificador, ai_desc FROM actoinseguro "+
-                " WHERE ai_id IN (SELECT id_acto_inseguro FROM calificaciones WHERE id_emp='"+id_persona+"')";
+        String queryEmp="";
+        if(tipo==1){
+            queryEmp="SELECT ai_id,ai_identificador, ai_desc FROM actoinseguro "+
+                " WHERE ai_id IN (SELECT id_acto_inseguro FROM calificaciones)";
+        }else{
+            queryEmp="SELECT ai_id,ai_identificador, ai_desc FROM actoinseguro "+
+                    " WHERE ai_id IN (SELECT id_acto_inseguro FROM calificaciones WHERE id_emp='"+id_persona+"')";
+        }
         Log.i("QRY","q= "+queryEmp);
         final ArrayList<HashMap<String, String>> results;
         results= Utils.exeLocalQuery(this, queryEmp);
@@ -88,7 +101,13 @@ public class ActInsSummaryActivity extends Activity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if(tipo!=1){
+                    Intent intent =
+                            new Intent(ActInsSummaryActivity.this, NewCorrectiveActivity.class);
+                    intent.putExtra("id_emp",""+id_persona);
+                    intent.putExtra("ai_id", results.get(position).get("ai_id"));
+                    startActivity(intent);
+                }
             }
         });
 

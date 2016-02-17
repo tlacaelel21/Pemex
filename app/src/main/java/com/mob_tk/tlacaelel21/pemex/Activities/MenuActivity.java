@@ -70,8 +70,11 @@ public class MenuActivity extends Activity {
         Button btnAlertas=(Button) findViewById(R.id.boton_alertas);
         Button btnPerfil=(Button) findViewById(R.id.boton_perfil);
         Button btnComunicacion=(Button) findViewById(R.id.boton_comunicacion);
+        Button btnAuditRealiz=(Button) findViewById(R.id.boton_auditorias_realiz);
 
-       // Log.i("PREF-->", preferences.getString("emp_nombre", ""));
+
+        final String emp_id=""+preferences.getString("emp_id", "");
+        Log.i("PREF_IDEMP-->","-->"+ preferences.getString("emp_id", ""));
 
 
         btnIniAudit.setOnClickListener(new View.OnClickListener() {
@@ -85,19 +88,20 @@ public class MenuActivity extends Activity {
                 editor.putString("region", "");
                 editor.putString("area", "");
                 editor.putString("dep_id", "");
-                editor.putString("reg_id","");
-                editor.putString("dep_id","");
-                editor.putString("audit_date","");
-                editor.putString("audit_week","");
+                editor.putString("reg_id", "");
+                editor.putString("dep_id", "");
+                editor.putString("audit_date", "");
+                editor.putString("audit_week", "");
                 //variables seg pantalla
-                editor.putString("instalaciones","");
-                editor.putString("nums","");
-                editor.putString("conts","");
-                editor.putString("jefes","");
+                editor.putString("instalaciones", "");
+                editor.putString("nums", "");
+                editor.putString("conts", "");
+                editor.putString("jefes", "");
                 editor.putString("actividad", "");
-                editor.putString("employ_size","");
-                editor.putString("conts_size","");
+                editor.putString("employ_size", "");
+                editor.putString("conts_size", "");
                 editor.clear();
+                editor.putString("emp_id", "" + emp_id);
                 editor.commit();
                 clearCalif();
                 Intent intent =
@@ -106,9 +110,16 @@ public class MenuActivity extends Activity {
             }
         });
 
+        btnAuditRealiz.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, AuditDidActivity.class);
+                startActivity(intent);
+            }
+        });
         btnPermisos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                Intent intent = new Intent(MenuActivity.this, WorkPermits.class);
+                startActivity(intent);
             }
         });
 

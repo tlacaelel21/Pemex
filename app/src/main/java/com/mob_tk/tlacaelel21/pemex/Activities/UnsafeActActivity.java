@@ -61,6 +61,7 @@ public class UnsafeActActivity extends ExpandableListActivity {
                 startActivity(intent);
             }
         });
+        Log.i("PREF_IDEMP-->","-->"+ preferences.getString("emp_id", ""));
     }
 
     /* Creating the Hashmap for the row */

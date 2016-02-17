@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
         Log.i("Query",query);
         results= Utils.exeLocalQuery(this, query);
             for(int idx=0;idx<results.size();idx++){
+                Log.i("EMP_ID","->"+results.get(0).get("emp_id"));
                 idUsuario=Integer.parseInt(results.get(idx).get("id"));
                 //Resultados
                 SharedPreferences prefs = getSharedPreferences("pemex_prefs", MODE_PRIVATE);

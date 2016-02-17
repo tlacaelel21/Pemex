@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -58,6 +59,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
         btnArea= (Button) findViewById(R.id.boton_area_p1);
 
         Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("Mexico/General"));
         day = cal.get(Calendar.DAY_OF_MONTH);
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
@@ -135,7 +137,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
                     if(preferences.getString("dep_id", "").length()>0)
                         dep_id=Integer.parseInt(preferences.getString("dep_id", ""));
                 }
-                Log.i("ID_DEP",""+dep_id);
+                Log.i("ID_DEP", "" + dep_id);
                 if(dep_id>0){
                     Intent intent =
                             new Intent(AuditP1Activity.this, GeneralContainerActivity.class);
@@ -242,6 +244,7 @@ public class AuditP1Activity extends Activity implements OnClickListener{
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        Log.i("PREF_IDEMP-->","-->"+ preferences.getString("emp_id", ""));
         /*View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -266,8 +269,8 @@ public class AuditP1Activity extends Activity implements OnClickListener{
                     + selectedYear);
             fecha_wc.setText(fecha);
             Date date = new Date();
-
-                DateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+            //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
             Log.i("FECHA",""+fecha);
             try {
                 date = format1.parse(fecha);

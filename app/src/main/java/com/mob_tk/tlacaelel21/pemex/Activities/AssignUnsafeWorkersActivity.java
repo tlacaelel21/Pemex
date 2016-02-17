@@ -96,7 +96,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
             titulo=extras.getString("titulo");
             empNum=extras.getString("emp_num_emp");
             nomEmp=extras.getString("nombre");
-            empId=extras.getString("emp_id");
+            empId=extras.getString("emp_id_calif");
         }
         tituloActoI.setText(titulo);
         tvNumEmp.setText(empNum);
@@ -264,6 +264,7 @@ public class AssignUnsafeWorkersActivity extends Activity implements onSubmitLis
                     insertCalif(ai_id, empId, calif, descri, "",empNum);
             }
         });
+        //Log.i("PREF_IDEMP-->", preferences.getString("emp_id", ""));
     }
     /** Agregando a la BDLocal las calificaciones*/
     public void insertCalif(String id_acto_inseguro,String id_emp,String calif,String descri,String foto,String num_emp){

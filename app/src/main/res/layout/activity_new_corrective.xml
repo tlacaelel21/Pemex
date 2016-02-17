@@ -77,10 +77,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="10dp"
+                android:textAlignment="center"
                 android:drawablePadding="20dip"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
-                android:background="@drawable/btn_new_corr"
+                android:background="@drawable/btn_new_acc_blue"
                 android:textOff="@string/btn_rec"
                 android:textOn="@string/btn_rec"
                 android:textColor="#FFF"
@@ -89,25 +90,24 @@
                 android:textAllCaps="false"
                 android:gravity="left|center"
                 />
-            <Button
-                android:id="@+id/btn_comp"
+            <ToggleButton
+                android:id="@+id/btn_com"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="5dp"
-                android:drawablePadding="20dip"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp"
-                android:background="@drawable/btn_new_corr"
-                android:text="@string/btn_com"
-                android:textColor="#FFF"
+                android:textAlignment="center"
+                android:background="@drawable/btn_new_acc_white"
+                android:textOff="@string/btn_com"
+                android:textOn="@string/btn_com"
+                android:textColor="@color/btn_azul"
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:textAllCaps="false"
-                android:gravity="left|center"/>
+                android:gravity="left|center"
+                />
         </LinearLayout>
             <TextView
+                android:id="@+id/titulo_procedure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -116,20 +116,24 @@
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:text="@string/title_pa_1"
-                android:textColor="@color/colorTextBlack"
-                android:layout_toRightOf="@id/imageButton" />
+                android:textColor="@color/colorTextBlack"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:inputType="textMultiLine"
                 android:hint="@string/hint_titulo1"
                 android:ems="10"
-                android:id="@+id/eTPro"
+                android:id="@+id/eTRecomenda"
                 android:background="@color/colorInputLogin"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,26 +164,28 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/fecha_compromiso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textStyle="bold"
                     android:textSize="12dp"
-                    android:text="2015-12-17"
                     android:textColor="@color/colorTextBlack"
-                    android:layout_toRightOf="@id/imageButton" />
+                    android:layout_toRightOf="@id/imageButton"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
                 <ToggleButton
                     android:id="@+id/btn_si"
                     android:layout_width="40dp"
+                    android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
-                    android:paddingStart="10dp"
-                    android:background="@drawable/btn_new_corr"
+                    android:background="@drawable/btn_new_acc_white"
                     android:textOff="Si"
                     android:textOn="Si"
-                    android:textColor="#FFF"
+                    android:textColor="@color/btn_azul"
                     android:textStyle="bold"
                     android:textSize="12dp"
                     android:textAllCaps="false"
@@ -190,8 +196,8 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingStart="10dp"
-                    android:background="@drawable/btn_new_corr"
+                    android:textAlignment="center"
+                    android:background="@drawable/btn_new_acc_blue"
                     android:textOff="No"
                     android:textOn="No"
                     android:textColor="#FFF"
@@ -201,7 +207,32 @@
                     android:gravity="left|center"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="3dp"
+                android:background="@color/assign_unsafe"/>
+            <Button
+                android:id="@+id/btn_save_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/button_rec_psw"
+                android:text="@string/btn_save"
+                android:textColor="#FFF"
+                android:textSize="20dip"
+                android:textAllCaps="false"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/titulo_evidencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -211,50 +242,68 @@
                 android:textSize="12dp"
                 android:text="@string/evid"
                 android:textColor="@color/colorTextBlack"
-                android:layout_toRightOf="@id/imageButton" />
+                android:visibility="gone"
+                android:layout_alignParentTop="true"/>
             <EditText
+                android:id="@+id/eTEvidencia"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:paddingStart="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingEnd="10dp"
                 android:inputType="textMultiLine"
                 android:hint="@string/hint_evid"
                 android:ems="10"
-                android:id="@+id/eTAcc"
-                android:background="@color/colorInputLogin"/>
+                android:background="@color/colorInputLogin"
+                android:enabled="false"
+                android:layout_below="@+id/titulo_evidencia"
+                android:layout_alignStart="@+id/titulo_evidencia"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"/>
             <TextView
+                android:id="@+id/titulo_fecha_realizada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="15dp"
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:text="@string/fech_rea"
                 android:textColor="@color/colorTextBlack"
-                android:layout_toRightOf="@id/imageButton" />
+                android:layout_marginTop="23dp"
+                android:layout_below="@+id/eTEvidencia"
+                android:layout_alignStart="@+id/fecha_realizada"
+                android:visibility="gone"/>
             <TextView
+                android:id="@+id/fecha_realizada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="15dp"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:text="2015-12-17"
                 android:textColor="@color/colorTextBlack"
-                android:layout_toRightOf="@id/imageButton"/>
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:enabled="false"
+                android:text="12/12/2016"
+                android:visibility="gone"
+                android:layout_below="@+id/titulo_fecha_realizada"
+                android:layout_alignStart="@+id/titulo_evidencia" />
             <Button
+                android:id="@+id/btn_save_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/btn_save"
-                android:textColor="#FFF"
-                android:textStyle="bold"
-                android:textSize="20dip"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
+                android:paddingBottom="10dp"
                 android:background="@drawable/button_rec_psw"
+                android:text="@string/btn_save"
+                android:textColor="#FFF"
+                android:textSize="20dip"
                 android:textAllCaps="false"
-                android:id="@+id/btn_save"/>
+                android:layout_below="@+id/fecha_realizada"
+                android:layout_alignStart="@+id/fecha_realizada"
+                android:visibility="gone"/>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

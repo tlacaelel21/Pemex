@@ -192,6 +192,7 @@ public class AuditP2Activity extends Activity implements View.OnClickListener {
                 Log.i("SEMANA",""+preferences.getString("audit_week", ""));
             //}
         //}
+        Log.i("PREF_IDEMP-->","-->"+ preferences.getString("emp_id", ""));
     }
     @Override
     public void onClick(View v) {
